@@ -1,0 +1,22 @@
+**/.DS_Store
+__pycache__/
+*.py[cod]
+raw_data/
+svm_data/
+models/
+tabpfn_data/
+svm_data_backup/
+multi_class_nn/models
+libsvm/libsvm.so.4
+libsvm/svm-predict
+libsvm/svm-scale
+libsvm/svm-train
+libsvm/svm.o
+TabPFN/
+# svm-predict-Accuracy/
+# svm-predict-MacroF1/
+# svm-predict-TabPFN/
+multi_class_nn/svm-predict-NN-Accuracy
+multi_class_nn/svm-predict-NN-MacroF1
+results
+*.ipynb
