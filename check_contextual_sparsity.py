@@ -43,19 +43,29 @@ def do_train(
 
     # First-stage training with validation
     model_path = os.path.join(model_dir, "model.pth")
-    model = FeedforwardNN(input_size=train_dataset.get_num_features(), output_size=num_classes)
-    model, best_epoch, best_metric = train_model(
-        model=model,
-        train_loader=train_loader,
-        val_loader=val_loader,
-        learning_rate=learning_rate,
-        epochs=epochs,
-        patience=patience,
-        stop_criteria=stop_criteria,
-        save_path=model_path,
-    )
+
+    best_metric = -1 * np.inf
+    best_epoch = 0
+    best_lr = 0
+    for lr in learning_rate:
+        model = FeedforwardNN(input_size=train_dataset.get_num_features(), output_size=num_classes)
+        model, best_epoch_one, best_metric_one = train_model(
+            model=model,
+            train_loader=train_loader,
+            val_loader=val_loader,
+            learning_rate=lr,
+            epochs=epochs,
+            patience=patience,
+            stop_criteria=stop_criteria,
+            save_path=model_path,
+        )
+        if best_metric_one >= best_metric:
+            best_metric = best_metric_one
+            best_epoch = best_epoch_one
+            best_lr = lr
 
     # Retrain on the full training set (no validation)
+    print(f"retrain with learning_rate = {best_lr}, epoch = {best_epoch}")
     full_train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     retrain_model_path = os.path.join(model_dir, "retrain_model.pth")
 
@@ -64,7 +74,7 @@ def do_train(
         model=retrain_model,
         train_loader=full_train_loader,
         val_loader=None,
-        learning_rate=learning_rate,
+        learning_rate=best_lr,
         epochs=best_epoch,  # reuse best epoch from stage-1
         patience=patience,
         stop_criteria=stop_criteria,
@@ -175,7 +185,7 @@ if __name__ == "__main__":
     batch_size    = 32
     epochs        = 40
     patience      = 10
-    learning_rate = 5e-3            # try values like [1e-5 ... 5e-2]
+    lr_list      = [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2] # try values like [1e-5, 5e-5, 1e-4, 5e-4, 1e-3, 5e-3, 1e-2, 5e-2]
     topk_ratio    = np.arange(0.1, 1.0, 0.05, dtype=float)
     model_dir     = os.path.join("models", dataset_name)
 
@@ -192,7 +202,7 @@ if __name__ == "__main__":
         batch_size=batch_size,
         epochs=epochs,
         patience=patience,
-        learning_rate=learning_rate,
+        learning_rate=lr_list,
     )
 
     # Evaluate using saved retrained model
