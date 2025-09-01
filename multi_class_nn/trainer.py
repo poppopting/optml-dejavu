@@ -3,8 +3,8 @@ import torch.optim as optim
 import numpy as np
 from tqdm.auto import trange
 
-from data_utils import set_seed
-from evaluation import evaluate_model
+from .data_utils import set_seed
+from .evaluation import evaluate_model
 
 def train_model(model, train_loader, val_loader, learning_rate, epochs, patience, stop_criteria, save_path):
     set_seed(42)

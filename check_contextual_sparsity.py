@@ -1,14 +1,12 @@
 import os
-import sys
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-sys.path.append('./multi_class_nn')
-from data_utils import SVMFormatDataset, stratified_split
-from model import FeedforwardNN
-from trainer import train_model
+from multi_class_nn.data_utils import SVMFormatDataset, stratified_split
+from multi_class_nn.model import FeedforwardNN
+from multi_class_nn.trainer import train_model
 
 
 def read_dataset(source_folder: str, dataset_name: str, fold: int = 1):
@@ -180,7 +178,7 @@ def plot(
 if __name__ == "__main__":
     # Parameters
     source_folder = '/home/ktdev/optml-dejavu/svm_data'
-    dataset_name  = 'aloi'          # options: 'segment', 'vehicle', 'aloi'
+    dataset_name  = 'segment'          # options: 'segment', 'vehicle', 'aloi', 'mnist'
     stop_criteria = 'Accuracy'
     batch_size    = 32
     epochs        = 40

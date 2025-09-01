@@ -3,7 +3,7 @@
 # keel datasets
 KEEL_DATASETS=("autos" "balance" "car" "cleveland" "dermatology" "ecoli" "flare" "glass" "hayes-roth" "lymphography" "newthyroid" "shuttle" "thyroid" "zoo")
 UCI_DATASETS=("hcv")
-LIBSVM_DATASETS=("segment" "vehicle" "aloi")
+LIBSVM_DATASETS=("segment" "vehicle" "aloi" "mnist")
 
 SOURCE_DIR="raw_data"
 # folder to save svm data format

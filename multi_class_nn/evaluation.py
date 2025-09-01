@@ -1,9 +1,5 @@
 import torch
-import numpy as np
-from itertools import combinations
-from torch.utils.data import DataLoader
 from sklearn.metrics import f1_score
-from model import FeedforwardNN
 
 def evaluate_model(model, loader, loss, metric, device=None):
     if device is None:
