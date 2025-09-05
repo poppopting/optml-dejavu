@@ -5,8 +5,8 @@ Please read **Problem Setting** first to understand the task, and then refer to 
 ## 1. Problem Setting
 
 The goal of this project is to **verify contextual sparsity** in multi-class classification:  
-*after training a standard feed-forward network, we test whether only the top-k (by magnitude) hidden features are sufficient for accurate predictions.*  
-Concretely, for a range of density ratios in (0, 1], we keep the top-ratio fraction of activations from the first hidden layer for each sample, mask out the remaining ones, and then measure test accuracy as a function of the ratio.
+*after training a standard feed-forward network, we test whether only the top-k hidden features are sufficient for accurate predictions.*  
+Specifically, for a range of density ratios in (0, 1], we keep the top-ratio fraction of activations from the first hidden layer for each sample, mask out the remaining ones, and then measure test accuracy as a function of the ratio.
 
 ### 1.1 Datasets & Format
 - Datasets: **ALOI**, **MNIST**
