@@ -164,6 +164,7 @@ def plot(
         accuracy_across_k.append(acc)
 
     # Plot and save
+    plt.figure(figsize=(8,6))
     plt.rcParams['font.size'] = 16
     plt.plot(ratios, accuracy_across_k, marker='o')
     plt.title(dataset_name)
