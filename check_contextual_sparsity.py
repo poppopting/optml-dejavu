@@ -11,8 +11,8 @@ from multi_class_nn.trainer import train_model
 
 def read_dataset(source_folder: str, dataset_name: str, fold: int = 1):
     """Build train/test datasets from SVM files for the given dataset and fold."""
-    train_file = f'{source_folder}/{dataset_name}/train_{dataset_name}_{fold}.svm'
-    test_file  = f'{source_folder}/{dataset_name}/test_{dataset_name}_{fold}.svm'
+    train_file = os.path.join(source_folder, dataset_name, f'train_{dataset_name}_{fold}.svm')
+    test_file  = os.path.join(source_folder, dataset_name, f'test_{dataset_name}_{fold}.svm')
 
     train_dataset = SVMFormatDataset(train_file)
     test_dataset  = SVMFormatDataset(test_file, num_features=train_dataset.get_num_features())
@@ -73,7 +73,7 @@ def do_train(
         train_loader=full_train_loader,
         val_loader=None,
         learning_rate=best_lr,
-        epochs=best_epoch,  # reuse best epoch from stage-1
+        epochs=best_epoch,
         patience=patience,
         stop_criteria=stop_criteria,
         save_path=retrain_model_path,
@@ -177,9 +177,9 @@ def plot(
 
 if __name__ == "__main__":
     # Parameters
-    source_folder = '/home/ktdev/optml-dejavu/svm_data'
-    dataset_name  = 'segment'          # options: 'segment', 'vehicle', 'aloi', 'mnist'
-    stop_criteria = 'Accuracy'
+    source_folder = 'svm_data'
+    dataset_name  = 'aloi'          # options: 'aloi', 'mnist'
+    stop_criteria = 'Accuracy'      # options:  'Accuracy', 'MacroF1', 'Loss'     
     batch_size    = 32
     epochs        = 40
     patience      = 10

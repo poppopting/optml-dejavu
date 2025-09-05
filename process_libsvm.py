@@ -29,7 +29,7 @@ def process_libsvm(dataset_name, source_folder='raw_data', save_folder='svm_data
     save_dir = os.path.join(save_folder, dataset_name)
     os.makedirs(save_dir, exist_ok=True)
 
-    labels, features = parse_libsvm_data(f'{source_folder}/{dataset_name}/{dataset_name}.scale')
+    labels, features = parse_libsvm_data(f'{source_folder}/{dataset_name}.scale')
 
     vectorizer = DictVectorizer(sparse=False)
     X = vectorizer.fit_transform(features)
