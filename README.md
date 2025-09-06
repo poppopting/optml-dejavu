@@ -9,7 +9,7 @@ The goal of this project is to **verify contextual sparsity** in multi-class cla
 Specifically, for a range of density ratios in (0, 1], we keep the top-ratio fraction of activations from the first hidden layer for each sample, mask out the remaining ones, and then measure test accuracy as a function of the ratio.
 
 ### 1.1 Datasets & Format
-- Datasets: **ALOI**, **MNIST**
+- Datasets: **ALOI**, **MNIST** (available in [LIBSVM Data](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/))
 - Splits: stratified **5-fold**; default uses **fold = 1**.
 - Files are expected under `svm_data/<dataset>/train_<dataset>_<fold>.svm` and `svm_data/<dataset>/test_<dataset>_<fold>.svm`.
 
